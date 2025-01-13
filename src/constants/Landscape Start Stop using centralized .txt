@@ -1,0 +1,23 @@
+Landscape Start Stop using centralized command center- enable
+ Start
+ Stop
+SAP Pre and Post Copy automation -
+OS Level Alert for SAP File system
+HANA Level Alerting
+SAP Daily System Monitoring for various Tcodes
+SAP client level reporting on Client Open / Close status
+SAP client opening/ closing from Centralized deck
+Landscape wise SAP SP pack level reporting and comparing
+File system growth utilization forecasting
+Automated TR retrofit during Parallel Landscape
+Automated Maintenance Certificate renewal
+HANA DB and CLIENT Upgrade
+TR comparing bewtween DEV / QA/ PRD
+Delete Obsolete and deprecated users in system
+Overall System Health Status Dashboard
+Kernel Upgrade
+VM Provisioning and VM Monitoring in Cloud
+Automated Strust Certificate Renewal
+Client setting logs for monthly report.Automate process of SCC4 logs reporting.
+Cleanup Scripts for various Directories
+SAP Upgrade/ Migration Readiness Check from Basis/Infra side
