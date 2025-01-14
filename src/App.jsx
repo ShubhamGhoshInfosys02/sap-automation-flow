@@ -1,10 +1,12 @@
 import "./App.css";
 import ReactFlowUI from "./components/ReactFlowUI/ReactFlowUI";
 import OperationsPanel from "./components/OperationsPanel/OperationsPanel";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
+      <Header/>
       <div
         style={{
           display: "flex",
