@@ -3,31 +3,37 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
+  Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const tasks = [
-  "Landscape Start Stop using centralized command center - enable",
-  "SAP Pre and Post Copy automation",
-  "OS Level Alert for SAP File system",
-  "HANA Level Alerting",
-  "SAP Daily System Monitoring for various Tcodes",
-  "SAP client level reporting on Client Open / Close status",
-  "SAP client opening/ closing from Centralized deck",
-  "Landscape wise SAP SP pack level reporting and comparing",
-  "File system growth utilization forecasting",
-  "Automated TR retrofit during Parallel Landscape",
-  "Automated Maintenance Certificate renewal",
-  "HANA DB and CLIENT Upgrade",
-  "TR comparing between DEV / QA/ PRD",
-  "Delete Obsolete and deprecated users in system",
-  "Overall System Health Status Dashboard",
-  "Kernel Upgrade",
-  "VM Provisioning and VM Monitoring in Cloud",
-  "Automated Strust Certificate Renewal",
-  "Client setting logs for monthly report. Automate process of SCC4 logs reporting.",
-  "Cleanup Scripts for various Directories",
-  "SAP Upgrade/ Migration Readiness Check from Basis/Infra side",
+  {
+    name: "Landscape Start Stop using centralized command center - enable",
+    components: ["Start", "Stop"],
+  },
+  { name: "SAP Pre and Post Copy automation" },
+  { name: "OS Level Alert for SAP File system" },
+  { name: "HANA Level Alerting" },
+  { name: "SAP Daily System Monitoring for various Tcodes" },
+  { name: "SAP client level reporting on Client Open / Close status" },
+  { name: "SAP client opening/ closing from Centralized deck" },
+  { name: "Landscape wise SAP SP pack level reporting and comparing" },
+  { name: "File system growth utilization forecasting" },
+  { name: "Automated TR retrofit during Parallel Landscape" },
+  { name: "Automated Maintenance Certificate renewal" },
+  { name: "HANA DB and CLIENT Upgrade" },
+  { name: "TR comparing between DEV / QA/ PRD" },
+  { name: "Delete Obsolete and deprecated users in system" },
+  { name: "Overall System Health Status Dashboard" },
+  { name: "Kernel Upgrade" },
+  { name: "VM Provisioning and VM Monitoring in Cloud" },
+  { name: "Automated Strust Certificate Renewal" },
+  {
+    name: "Client setting logs for monthly report. Automate process of SCC4 logs reporting.",
+  },
+  { name: "Cleanup Scripts for various Directories" },
+  { name: "SAP Upgrade/ Migration Readiness Check from Basis/Infra side" },
 ];
 
 const OperationsPanel = () => {
@@ -37,20 +43,37 @@ const OperationsPanel = () => {
         width: "300px",
         padding: "20px",
         borderRight: "1px solid #ccc",
-        height: "100vh",
+        height: "calc(100vh - 5.5rem - 4px)",
         overflowY: "scroll",
       }}
     >
       {tasks.map((task, index) => (
         <Accordion key={index} disabled={index !== 0}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{task}</Typography>
+            <Typography>{task.name}</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              {/* You can add more details or actions related to each task here */}
-              Details about {task}
-            </Typography>
+          <AccordionDetails
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {task?.components && task?.components.length > 0 ? (
+              task?.components.map((component, cindex) => (
+                <Button
+                  style={{ width: "100%", marginBottom: "2px" }}
+                  key={`${component}-${cindex}`}
+                  variant="outlined"
+                  color={component == "Start" ? "success" : "error"}
+                >
+                  {component}
+                </Button>
+              ))
+            ) : (
+              <Typography>Components coming soon.</Typography>
+            )}
           </AccordionDetails>
         </Accordion>
       ))}

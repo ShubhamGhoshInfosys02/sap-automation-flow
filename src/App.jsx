@@ -6,12 +6,12 @@ import Header from "./components/Header/Header";
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
       <div
         style={{
           display: "flex",
           justifyContent: "flex-start",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <OperationsPanel />
