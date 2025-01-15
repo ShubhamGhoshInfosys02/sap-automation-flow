@@ -2,6 +2,7 @@ import "./App.css";
 import ReactFlowUI from "./components/ReactFlowUI/ReactFlowUI";
 import OperationsPanel from "./components/OperationsPanel/OperationsPanel";
 import Header from "./components/Header/Header";
+import TextUpdaterNode from "./components/CustomNode/CustomNode";
 
 function App() {
   return (

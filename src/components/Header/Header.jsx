@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
         <div className="mainone">
           <div className="mainoneimg">
             {" "}
-            <ArrowBackIcon />
+            <ArrowBackIosNewIcon />
           </div>
           <p className="mainonetitle">SAP Automation</p>
         </div>
