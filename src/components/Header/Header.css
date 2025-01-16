@@ -20,10 +20,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     
 }
 .mainonetitle{
     padding-left: 1rem;
+    
 }
 .maintwo{
     padding-left: 10px;
@@ -34,6 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+   
 
 }
 .mainthree{
@@ -50,6 +53,7 @@
     border-radius: 10px;
     height: 2.5rem;
     background-color: white;
+    cursor: pointer;
 }
 .mainthreebutton2{
     padding-left: 15px;
@@ -61,4 +65,5 @@
     margin-left: 1rem;
     margin-right: 1rem;
     color: white;
+    cursor: pointer;
 }
