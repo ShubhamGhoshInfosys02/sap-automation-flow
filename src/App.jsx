@@ -4,11 +4,17 @@ import OperationsPanel from "./components/OperationsPanel/OperationsPanel";
 import Header from "./components/Header/Header";
 import TextUpdaterNode from "./components/CustomNode/CustomNode";
 import OperationsLeftPanel from "./components/OperationsLeftPanel/OperationsLeftPanel";
+import DragPanel from "./components/dragpanel/dragPanel";
+import { Provider } from 'react-redux';
+import store from "./redux/store";
+import { useSelector } from "react-redux";
 
 function App() {
+
   return (
+    <Provider store={store}>
     <>
-      <Header />
+    <Header />
       <div
         style={{
           display: "flex",
@@ -17,10 +23,14 @@ function App() {
         }}
       >
         <OperationsPanel />
+        <DragPanel/>
         <ReactFlowUI />
-       <OperationsLeftPanel/>
+        <OperationsLeftPanel/>
+
       </div>
+     
     </>
+     </Provider>
   );
 }
 

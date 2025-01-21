@@ -40,6 +40,7 @@ export default function App() {
       style={{
         width: "calc(100vw - 300px)",
         height: "calc(100vh - 5.5rem - 42px)",
+        position:"relative"
       }}
     >
       <ReactFlow

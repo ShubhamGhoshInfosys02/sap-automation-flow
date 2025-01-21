@@ -6,11 +6,13 @@ import {
   Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useDispatch } from "react-redux";
+import { dragPanelOn } from "../../redux/action/actions";
 
 const tasks = [
   {
     name: "Landscape Start Stop using centralized command center - enable",
-    components: ["Start", "Stop"],
+    components: ["Start"],
   },
   { name: "SAP Pre and Post Copy automation" },
   { name: "OS Level Alert for SAP File system" },
@@ -37,6 +39,8 @@ const tasks = [
 ];
 
 const OperationsPanel = () => {
+
+  const dispatch=useDispatch();
   return (
     <div
       style={{
@@ -67,6 +71,7 @@ const OperationsPanel = () => {
                   key={`${component}-${cindex}`}
                   variant="outlined"
                   color={component == "Start" ? "success" : "error"}
+                  onClick={() => dispatch(dragPanelOn())}
                 >
                   {component}
                 </Button>
@@ -77,6 +82,7 @@ const OperationsPanel = () => {
           </AccordionDetails>
         </Accordion>
       ))}
+
     </div>
   );
 };
