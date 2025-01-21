@@ -1,0 +1,2 @@
+export const DRAGPANELON = 'DRAGPANELON';
+export const DRAGPANELOFF = 'DRAGPANELOFF';
