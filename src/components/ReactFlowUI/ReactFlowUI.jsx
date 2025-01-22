@@ -1,12 +1,10 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import {
   ReactFlow,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
-  applyEdgeChanges,
-  applyNodeChanges,
   addEdge,
 } from "@xyflow/react";
 
@@ -15,12 +13,30 @@ import CustomButtonNode from "../CustomNode/CustomNode";
 import CustomFunctionNode from "../CustomFunctionNode/CustomFunctionNode";
 
 const initialNodes = [
-  { id: "1",type: 'customUpdater', position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2",type: 'customFunctionUpdater', position: { x: 0, y: 100 }, data: { label: "2" } },
-  { id: "3",type: 'customUpdater', position: { x: 0, y: 200 }, data: { label: "3" } },
+  {
+    id: "1",
+    type: "customUpdater",
+    position: { x: 0, y: 0 },
+    data: { label: "1" },
+  },
+  {
+    id: "2",
+    type: "customFunctionUpdater",
+    position: { x: 0, y: 100 },
+    data: { label: "2" },
+  },
+  {
+    id: "3",
+    type: "customUpdater",
+    position: { x: 0, y: 200 },
+    data: { label: "3" },
+  },
 ];
 
-const nodeTypes = { customUpdater: CustomButtonNode,customFunctionUpdater:CustomFunctionNode };
+const nodeTypes = {
+  customUpdater: CustomButtonNode,
+  customFunctionUpdater: CustomFunctionNode,
+};
 
 // const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 const initialEdges = [];
@@ -33,14 +49,13 @@ export default function App() {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-  
 
   return (
     <div
       style={{
         width: "calc(100vw - 300px)",
         height: "calc(100vh - 5.5rem - 42px)",
-        position:"relative"
+        position: "relative",
       }}
     >
       <ReactFlow
@@ -51,7 +66,6 @@ export default function App() {
         onConnect={onConnect}
         nodeTypes={nodeTypes}
         proOptions={proOptions}
-        
         fitView
       >
         <Controls />

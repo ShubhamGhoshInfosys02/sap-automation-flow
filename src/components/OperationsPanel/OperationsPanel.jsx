@@ -6,8 +6,8 @@ import {
   Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { togglePanel } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
-import { dragPanelOn } from "../../redux/action/actions";
 
 const tasks = [
   {
@@ -39,14 +39,13 @@ const tasks = [
 ];
 
 const OperationsPanel = () => {
-
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   return (
     <div
       style={{
         width: "300px",
-        padding: "20px",
         borderRight: "1px solid #ccc",
+        backgroundColor: "##F5F6F7",
         height: "calc(100vh - 5.5rem - 4px)",
         overflowY: "scroll",
       }}
@@ -54,7 +53,7 @@ const OperationsPanel = () => {
       {tasks.map((task, index) => (
         <Accordion key={index} disabled={index !== 0}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{task.name}</Typography>
+            <Typography style={{ fontSize: "small" }}>{task.name}</Typography>
           </AccordionSummary>
           <AccordionDetails
             style={{
@@ -71,7 +70,7 @@ const OperationsPanel = () => {
                   key={`${component}-${cindex}`}
                   variant="outlined"
                   color={component == "Start" ? "success" : "error"}
-                  onClick={() => dispatch(dragPanelOn())}
+                  onClick={() => dispatch(togglePanel())}
                 >
                   {component}
                 </Button>
@@ -82,7 +81,6 @@ const OperationsPanel = () => {
           </AccordionDetails>
         </Accordion>
       ))}
-
     </div>
   );
 };

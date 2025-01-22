@@ -1,6 +1,5 @@
-import React from "react";
 import "./Header.css";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const Header = () => {
   return (
@@ -17,8 +16,18 @@ const Header = () => {
           <p>Diagram View</p>
         </div>
         <div className="mainthree">
-          <button className="mainthreebutton1" onClick={()=>console.log("discord button clicked")}>Discard</button>
-          <button className="mainthreebutton2" onClick={()=>console.log("Publish button clicked")}>Publish to Site</button>
+          <button
+            className="mainthreebutton1"
+            onClick={() => console.log("discord button clicked")}
+          >
+            Discard
+          </button>
+          <button
+            className="mainthreebutton2"
+            onClick={() => console.log("Publish button clicked")}
+          >
+            Execute
+          </button>
         </div>
       </div>
       <div
