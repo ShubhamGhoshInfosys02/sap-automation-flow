@@ -1,12 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Handle, Position } from "@xyflow/react";
 import "./CustomNode.css";
 
-const TimeScheduler = () => {
-  const [selectedDateTime, setSelectedDateTime] = useState({
-    date: "",
-    time: "",
-  });
+const TimeScheduler = ({ data }) => {
+  const [selectedDateTime, setSelectedDateTime] = useState(data?.value ?? {});
 
   const handleDateChange = (e) => {
     setSelectedDateTime({ date: e.target.value, time: selectedDateTime.time });

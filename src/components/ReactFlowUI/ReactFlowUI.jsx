@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import {
   ReactFlow,
   Controls,
@@ -11,7 +11,8 @@ import "@xyflow/react/dist/style.css";
 import CustomButtonNode from "../CustomNode/CustomNode";
 import CustomFunctionNode from "../CustomFunctionNode/CustomFunctionNode";
 import TimeScheduler from "../TimeScheduler/TimeScheduler";
-
+import { updateNodes, updateEdges } from "../../redux/slices/startPanelSlice";
+import { useDispatch } from "react-redux";
 const initialNodes = [];
 
 const nodeTypes = {
@@ -21,9 +22,18 @@ const nodeTypes = {
 };
 
 export default function App() {
+  const dispatch = useDispatch();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const proOptions = { hideAttribution: true };
+  useEffect(() => {
+    dispatch(updateNodes(nodes));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nodes]);
+  useEffect(() => {
+    dispatch(updateEdges(edges));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [edges]);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -52,7 +62,10 @@ export default function App() {
       id: `node-${nodes.length + 1}`,
       type: type,
       position: { x: event.clientX + 50, y: event.clientY + 50 },
-      data: { label: "new" },
+      data: {
+        label: `node-${nodes.length + 1}`,
+        value: {},
+      },
     };
 
     setNodes((prevNodes) => prevNodes.concat(newNode));

@@ -7,6 +7,8 @@ const startPanelSlice = createSlice({
     isOpen: false,
     isExecuteOpen: false,
     componentType: "",
+    nodes: [],
+    edges: [],
   },
   reducers: {
     togglePanel: (state) => {
@@ -20,12 +22,24 @@ const startPanelSlice = createSlice({
       console.log("action", action);
       state.componentType = action.payload;
     },
+    updateNodes: (state, action) => {
+      action.payload.map((data) => console.log("Nodes update", data));
+      // state.nodes = action.payload.map((data)=>);
+    },
+    updateEdges: (state, action) => {
+      state.edges = action.payload;
+    },
   },
 });
 
 // Export actions
-export const { togglePanel, toggleExecutePanel, setComponentType } =
-  startPanelSlice.actions;
+export const {
+  togglePanel,
+  toggleExecutePanel,
+  setComponentType,
+  updateNodes,
+  updateEdges,
+} = startPanelSlice.actions;
 
 // Export the reducer
 export default startPanelSlice.reducer;
