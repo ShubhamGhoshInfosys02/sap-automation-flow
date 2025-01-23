@@ -7,48 +7,64 @@ import {
   useEdgesState,
   addEdge,
 } from "@xyflow/react";
-
 import "@xyflow/react/dist/style.css";
 import CustomButtonNode from "../CustomNode/CustomNode";
 import CustomFunctionNode from "../CustomFunctionNode/CustomFunctionNode";
+import TimeScheduler from "../TimeScheduler/TimeScheduler";
 
-const initialNodes = [
-  {
-    id: "1",
-    type: "customUpdater",
-    position: { x: 0, y: 0 },
-    data: { label: "1" },
-  },
-  {
-    id: "2",
-    type: "customFunctionUpdater",
-    position: { x: 0, y: 100 },
-    data: { label: "2" },
-  },
-  {
-    id: "3",
-    type: "customUpdater",
-    position: { x: 0, y: 200 },
-    data: { label: "3" },
-  },
-];
+const initialNodes = [];
 
 const nodeTypes = {
   customUpdater: CustomButtonNode,
   customFunctionUpdater: CustomFunctionNode,
+  customTimeUpdater: TimeScheduler,
 };
-
-// const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
-const initialEdges = [];
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const proOptions = { hideAttribution: true };
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+  const onDrop = (event) => {
+    event.preventDefault();
+    const data = JSON.parse(
+      event.dataTransfer.getData("application/reactflow")
+    );
+    console.log("dropped data", data.componentType);
+    if (!data) {
+      console.error("No data found in dataTransfer");
+      return;
+    }
+    let type = "";
+    if (data.componentType == "TimeSecheduler") {
+      type = "customTimeUpdater";
+    } else if (data.componentType == "ServerSelection") {
+      type = "customFunctionUpdater";
+    } else if (data.componentType == "Start") {
+      type = "customUpdater";
+    } else {
+      return;
+    }
+    const newNode = {
+      id: `node-${nodes.length + 1}`,
+      type: type,
+      position: { x: event.clientX + 50, y: event.clientY + 50 },
+      data: { label: "new" },
+    };
+
+    setNodes((prevNodes) => prevNodes.concat(newNode));
+  };
+
+  console.log("nodes", nodes);
+  console.log("edges", edges);
+
+  const onDragOver = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  };
 
   return (
     <div
@@ -59,6 +75,8 @@ export default function App() {
       }}
     >
       <ReactFlow
+        onDrop={onDrop}
+        onDragOver={onDragOver}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -69,7 +87,6 @@ export default function App() {
         fitView
       >
         <Controls />
-        {/* <MiniMap zoomable pannable /> */}
         <Background variant="dots" />
       </ReactFlow>
     </div>

@@ -1,7 +1,10 @@
 import "./Header.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { toggleExecutePanel } from "../../redux/slices/startPanelSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <div>
       <div className="main">
@@ -18,13 +21,16 @@ const Header = () => {
         <div className="mainthree">
           <button
             className="mainthreebutton1"
-            onClick={() => console.log("discord button clicked")}
+            onClick={() => alert("Discord button is not implemeted")}
           >
             Discard
           </button>
           <button
             className="mainthreebutton2"
-            onClick={() => console.log("Publish button clicked")}
+            onClick={() => {
+              console.log("Execute Panel Start");
+              dispatch(toggleExecutePanel());
+            }}
           >
             Execute
           </button>

@@ -3,6 +3,7 @@ import ReactFlowUI from "./components/ReactFlowUI/ReactFlowUI";
 import OperationsPanel from "./components/OperationsPanel/OperationsPanel";
 import Header from "./components/Header/Header";
 import StartOperationsPanel from "./components/StartOperationsPanel/StartOperationsPanel";
+import ExecutionPanel from "./components/ExecutionPanel/ExecutionPanel";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       >
         <OperationsPanel />
         <StartOperationsPanel />
+        <ExecutionPanel />
         <ReactFlowUI />
       </div>
     </>
