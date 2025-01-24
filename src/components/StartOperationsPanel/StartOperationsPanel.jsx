@@ -54,6 +54,13 @@ const StartOperationsPanel = () => {
         >
           Start
         </Card>
+        <Card
+          className="cardStyle"
+          draggable
+          onDragStart={(e) => onDragStart(e, "Start")}
+        >
+          Stop
+        </Card>
       </div>
     </div>
   );

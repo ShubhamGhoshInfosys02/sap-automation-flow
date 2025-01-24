@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Button,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Divider } from "@mui/material";
 import { togglePanel } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
 
@@ -51,35 +44,20 @@ const OperationsPanel = () => {
       }}
     >
       {tasks.map((task, index) => (
-        <Accordion key={index} disabled={index !== 0}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography style={{ fontSize: "small" }}>{task.name}</Typography>
-          </AccordionSummary>
-          <AccordionDetails
+        <div key={`parent-${task}-${index}`}>
+          <div
+            key={`${task}-${index}`}
+            onClick={() => dispatch(togglePanel())}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              cursor: "pointer",
+              fontSize: "16px",
+              padding: "6px",
             }}
           >
-            {task?.components && task?.components.length > 0 ? (
-              task?.components.map((component, cindex) => (
-                <Button
-                  style={{ width: "100%", marginBottom: "2px" }}
-                  key={`${component}-${cindex}`}
-                  variant="outlined"
-                  color={component == "Start" ? "success" : "error"}
-                  onClick={() => dispatch(togglePanel())}
-                >
-                  {component}
-                </Button>
-              ))
-            ) : (
-              <Typography>Components coming soon.</Typography>
-            )}
-          </AccordionDetails>
-        </Accordion>
+            {task.name}
+          </div>
+          <Divider />
+        </div>
       ))}
     </div>
   );
