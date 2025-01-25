@@ -1,0 +1,9 @@
+.options {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px;
+}
+.disabled {
+  cursor: default;
+  background-color: grey;
+}
