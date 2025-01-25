@@ -1,10 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Handle, Position } from "@xyflow/react";
 import "./CustomNode.css";
+import { updateNodeValue } from "../../redux/slices/startPanelSlice";
+import { useDispatch } from "react-redux";
 
 const TimeScheduler = ({ data }) => {
-  const [selectedDateTime, setSelectedDateTime] = useState(data?.value ?? {});
+  const [selectedDateTime, setSelectedDateTime] = useState(
+    data?.value ?? { date: "", time: "" }
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(updateNodeValue({ ...data, value: selectedDateTime }));
+  }, [selectedDateTime]);
 
   const handleDateChange = (e) => {
     setSelectedDateTime({ date: e.target.value, time: selectedDateTime.time });

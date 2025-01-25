@@ -77,7 +77,7 @@ const StartOperationsPanel = () => {
         <Card
           className="cardStyle"
           draggable
-          onDragStart={(e) => onDragStart(e, "Start")}
+          onDragStart={(e) => onDragStart(e, "Stop")}
         >
           <DragIndicatorIcon style={{ fill: "#D3D3D3" }} />
           <DoDisturbIcon color="error" />

@@ -7,7 +7,8 @@ import "./ExecutionPanel.css";
 const ExecutionPanel = () => {
   const isOpen = useSelector((state) => state.startPanelSlice.isExecuteOpen);
   const dispatch = useDispatch();
-  console.log("execution isOpen", isOpen);
+  const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
+  console.log("reduxNode", reduxNode);
   return (
     <div className="econtainer">
       <div className={`epanel ${isOpen ? "open" : ""}`}>

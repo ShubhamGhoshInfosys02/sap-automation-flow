@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect } from "react";
 import {
   ReactFlow,
@@ -11,27 +12,32 @@ import "@xyflow/react/dist/style.css";
 import CustomButtonNode from "../CustomNode/CustomNode";
 import CustomFunctionNode from "../CustomFunctionNode/CustomFunctionNode";
 import TimeScheduler from "../TimeScheduler/TimeScheduler";
+import StopNode from "../Stop/StopNode";
 import { updateNodes, updateEdges } from "../../redux/slices/startPanelSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const nodeTypes = {
   customUpdater: CustomButtonNode,
   customFunctionUpdater: CustomFunctionNode,
   customTimeUpdater: TimeScheduler,
+  stopComponent: StopNode,
 };
 
 export default function App() {
   const dispatch = useDispatch();
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
+  useEffect(() => {
+    setNodes(reduxNode);
+  }, [reduxNode]);
+
   const proOptions = { hideAttribution: true };
   useEffect(() => {
     dispatch(updateNodes(nodes));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodes]);
   useEffect(() => {
     dispatch(updateEdges(edges));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edges]);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -48,22 +54,29 @@ export default function App() {
       return;
     }
     let type = "";
+    let value;
     if (data.componentType == "TimeSecheduler") {
       type = "customTimeUpdater";
+      value = { date: "", time: "" };
     } else if (data.componentType == "ServerSelection") {
       type = "customFunctionUpdater";
+      value = [];
     } else if (data.componentType == "Start") {
       type = "customUpdater";
+      value = "Start";
+    } else if (data.componentType == "Stop") {
+      type = "stopComponent";
+      value = "Stop";
     } else {
       return;
     }
     const newNode = {
       id: `node-${nodes.length + 1}`,
-      type: type,
+      type,
       position: { x: event.clientX + 50, y: event.clientY + 50 },
       data: {
         label: `node-${nodes.length + 1}`,
-        value: {},
+        value,
       },
     };
 

@@ -23,11 +23,22 @@ const startPanelSlice = createSlice({
       state.componentType = action.payload;
     },
     updateNodes: (state, action) => {
-      action.payload.map((data) => console.log("Nodes update", data));
-      // state.nodes = action.payload.map((data)=>);
+      state.nodes = action.payload;
     },
     updateEdges: (state, action) => {
       state.edges = action.payload;
+    },
+    updateNodeValue: (state, action) => {
+      const result = state.nodes.map((node) => {
+        if (node.id === action.payload.label) {
+          return {
+            ...node,
+            data: action.payload,
+          };
+        }
+        return node; // Return the node unchanged if it doesn't match
+      });
+      state.nodes = result;
     },
   },
 });
@@ -39,6 +50,7 @@ export const {
   setComponentType,
   updateNodes,
   updateEdges,
+  updateNodeValue,
 } = startPanelSlice.actions;
 
 // Export the reducer
