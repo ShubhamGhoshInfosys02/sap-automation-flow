@@ -1,5 +1,10 @@
 import IconButton from "@mui/material/IconButton";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import StorageIcon from "@mui/icons-material/Storage";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { togglePanel } from "../../redux/slices/startPanelSlice";
 import Card from "@mui/material/Card";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,28 +43,48 @@ const StartOperationsPanel = () => {
           draggable
           onDragStart={(e) => onDragStart(e, "TimeSecheduler")}
         >
-          Time Secheduler
+          <DragIndicatorIcon style={{ fill: "#D3D3D3" }} />
+          <AccessTimeIcon color="info" />
+          <div className="cardNameDescSection">
+            <div className="cardName">Time Secheduler</div>
+            <div className="cardDesc">Description : decription here</div>
+          </div>
         </Card>
         <Card
           className="cardStyle"
           draggable
           onDragStart={(e) => onDragStart(e, "ServerSelection")}
         >
-          Server Selection
+          <DragIndicatorIcon style={{ fill: "#D3D3D3" }} />
+          <StorageIcon color="info" />
+          <div className="cardNameDescSection">
+            <div className="cardName">Server Selection</div>
+            <div className="cardDesc">Description : decription here</div>
+          </div>
         </Card>
         <Card
           className="cardStyle"
           draggable
           onDragStart={(e) => onDragStart(e, "Start")}
         >
-          Start
+          <DragIndicatorIcon style={{ fill: "#D3D3D3" }} />
+          <PlayCircleOutlineIcon color="success" />
+          <div className="cardNameDescSection">
+            <div className="cardName">Start</div>
+            <div className="cardDesc">Description : decription here</div>
+          </div>
         </Card>
         <Card
           className="cardStyle"
           draggable
           onDragStart={(e) => onDragStart(e, "Start")}
         >
-          Stop
+          <DragIndicatorIcon style={{ fill: "#D3D3D3" }} />
+          <DoDisturbIcon color="error" />
+          <div className="cardNameDescSection">
+            <div className="cardName">Stop</div>
+            <div className="cardDesc">Description : decription here</div>
+          </div>
         </Card>
       </div>
     </div>

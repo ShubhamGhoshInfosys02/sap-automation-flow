@@ -1,6 +1,7 @@
 import { Divider } from "@mui/material";
 import { togglePanel } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
+import "./OperationsPanel.css";
 
 const tasks = [
   {
@@ -48,11 +49,7 @@ const OperationsPanel = () => {
           <div
             key={`${task}-${index}`}
             onClick={() => dispatch(togglePanel())}
-            style={{
-              cursor: "pointer",
-              fontSize: "16px",
-              padding: "6px",
-            }}
+            className={`options ${index > 0 ? "disabled" : ""}`}
           >
             {task.name}
           </div>

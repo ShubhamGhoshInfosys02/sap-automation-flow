@@ -13,7 +13,6 @@ import CustomFunctionNode from "../CustomFunctionNode/CustomFunctionNode";
 import TimeScheduler from "../TimeScheduler/TimeScheduler";
 import { updateNodes, updateEdges } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
-const initialNodes = [];
 
 const nodeTypes = {
   customUpdater: CustomButtonNode,
@@ -23,7 +22,7 @@ const nodeTypes = {
 
 export default function App() {
   const dispatch = useDispatch();
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const proOptions = { hideAttribution: true };
   useEffect(() => {
