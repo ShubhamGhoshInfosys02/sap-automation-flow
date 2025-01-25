@@ -1,20 +1,20 @@
 /* eslint-disable react/prop-types */
 import { Handle, Position } from "@xyflow/react";
-import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import "./CustomNode.css";
 
-const CustomButtonNode = ({ data }) => {
+const StopNode = ({ data }) => {
   console.log("start data", data);
 
   return (
     <>
       <Handle type="target" position={Position.Top} />
       <div className="maincustom">
-        <PlayCircleFilledWhiteIcon fontSize="medium" color="success" />
-        <div>Start</div>
+        <p>Stop</p>
+        <DoDisturbIcon fontSize="medium" color="error" />
       </div>
     </>
   );
 };
 
-export default CustomButtonNode;
+export default StopNode;
