@@ -27,7 +27,7 @@ const CustomFunctionNode = ({ data }) => {
       newSelectedItems.splice(currentIndex, 1);
     }
 
-    setSelectedItems(newSelectedItems);
+    setSelectedItems(newSelectedItems.sort());
   };
 
   return (

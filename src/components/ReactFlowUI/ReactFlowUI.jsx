@@ -28,6 +28,7 @@ export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
+  const discard = useSelector((state) => state.startPanelSlice.discard);
   useEffect(() => {
     setNodes(reduxNode);
   }, [reduxNode]);
@@ -43,6 +44,10 @@ export default function App() {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+  useEffect(() => {
+    setNodes([]);
+    setEdges([]);
+  }, [discard]);
   const onDrop = (event) => {
     event.preventDefault();
     const data = JSON.parse(
@@ -73,7 +78,7 @@ export default function App() {
     const newNode = {
       id: `node-${nodes.length + 1}`,
       type,
-      position: { x: event.clientX + 50, y: event.clientY + 50 },
+      position: { x: event.clientX, y: event.clientY },
       data: {
         label: `node-${nodes.length + 1}`,
         value,
