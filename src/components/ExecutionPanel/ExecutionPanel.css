@@ -30,7 +30,8 @@
 
 .ecardStyle {
   width: 90%;
-  margin-top: 5px;
+  margin: 16px;
   padding: 5px;
   cursor: grab;
+  
 }

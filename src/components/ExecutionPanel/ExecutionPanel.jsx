@@ -92,16 +92,18 @@ const ExecutionPanel = () => {
             <KeyboardDoubleArrowRightIcon fontSize="medium" />
           </IconButton>
         </div>
-        <Card className="ecardStyle">
-          <div>Time of Execution</div>
+        <Card className="ecardStyle" >
+          <div style={{display:"flex",justifyContent:"center"}}><p style={{fontSize:"20px",fontWeight:"bolder"}}>Time of Execution</p></div>
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-start",
               alignItems: "center",
+              marginLeft:"10px",
+              marginBottom:"10px"
             }}
           >
-            <span>Date : </span>
+            <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Date : </span>
             <span>
               {executionData?.dateTime?.date &&
               executionData?.dateTime?.date !== ""
@@ -112,11 +114,13 @@ const ExecutionPanel = () => {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-start",
               alignItems: "center",
+               marginLeft:"10px",
+              marginBottom:"10px"
             }}
           >
-            <span>Time :</span>
+            <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Time :</span>
             <span>
               {executionData?.dateTime?.time &&
               executionData?.dateTime?.time !== ""
@@ -126,26 +130,31 @@ const ExecutionPanel = () => {
           </div>
         </Card>
         <Card className="ecardStyle">
-          <div>Servers</div>
-          {executionData.server && executionData.server.length > 0 ? (
+        <div style={{display:"flex",justifyContent:"center"}}><p style={{fontSize:"20px",fontWeight:"bolder"}}>Servers</p></div>
+        {executionData.server && executionData.server.length > 0 ? (
             <div>
-              {executionData.server.map((d) => (
-                <div key={d}>{d}</div>
+              {executionData.server.map((d,index) => (
+                <div key={d} style={{display:'flex',flexDirection:"row"}}>
+                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{d}</p></div>
               ))}
             </div>
           ) : (
-            "No servers selected"
+            <div  style={{display:'flex',flexDirection:"row"}}>
+                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>No Servers Selected</p></div>
           )}
         </Card>
         <Card
           className="ecardStyle"
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
             alignItems: "center",
+            paddingLeft:"10px",
+            paddingTop:"10px",
+            paddingBottom:"10px"
           }}
         >
-          <span>Action :</span>
+          <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Action :</span>
           <span>
             {executionData.action !== ""
               ? executionData.action

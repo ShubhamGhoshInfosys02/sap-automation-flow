@@ -24,14 +24,25 @@ const TimeScheduler = ({ data }) => {
 
   return (
     <>
-      <div style={{ padding: "2px 5px", backgroundColor: "#FFF8DC" }}>
-        <div>Select Date and Time</div>
-        <div style={{ marginBottom: "20px" }}>
+      <div
+        style={{
+          paddingTop:"10px",
+          paddingBottom:"5px",
+          paddingLeft:"15px",
+          paddingRight:"15px",
+          backgroundColor: "white",
+          boxShadow: "0px 0px 20px 1px rgb(187, 186, 186)",
+          borderRadius: "10px",
+          fontWeight: "600"
+        }}
+      >
+        <div style={{paddingBottom:"10px"}}>Select Date and Time</div>
+        <div style={{ marginBottom: "20px"}}>
           <input
             type="date"
             value={selectedDateTime.date}
             onChange={handleDateChange}
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: "10px" ,padding:"3px",border: "1px solid rgb(30, 159, 233)",borderRadius: "10px"}}
           />
           <input
             type="time"
@@ -39,6 +50,7 @@ const TimeScheduler = ({ data }) => {
             name="time"
             value={selectedDateTime.time}
             onChange={handleTimeChange}
+            style={{padding:"2px",border: "1px solid rgb(30, 159, 233)",borderRadius: "10px"}}
           ></input>
         </div>
       </div>
