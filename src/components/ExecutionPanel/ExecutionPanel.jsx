@@ -21,7 +21,7 @@ const ExecutionPanel = () => {
   const executeCommands = useMemo(() => {
     if (executionData.server && executionData.action == "Start") {
       return executionData.server.map(
-        (d) => `sapcontrol -nr ${d} -function StartSystem`
+        (d) => `ssh fsssadm@${d} sapcontrol -nr 00 -function GetProcessList`
       );
     } else if (executionData.server && executionData.action == "Stop") {
       return executionData.server.map(
