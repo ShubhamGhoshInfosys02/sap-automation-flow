@@ -4,10 +4,10 @@ import OperationsPanel from "./components/OperationsPanel/OperationsPanel";
 import Header from "./components/Header/Header";
 import StartOperationsPanel from "./components/StartOperationsPanel/StartOperationsPanel";
 import ExecutionPanel from "./components/ExecutionPanel/ExecutionPanel";
+import ToastNotification from "./components/ToastNotification/ToastNotification";
 
 function App() {
   return (
-    // <Provider store={store}>
     <>
       <Header />
       <div
@@ -22,8 +22,8 @@ function App() {
         <ExecutionPanel />
         <ReactFlowUI />
       </div>
+      <ToastNotification />
     </>
-    // </Provider>
   );
 }
 

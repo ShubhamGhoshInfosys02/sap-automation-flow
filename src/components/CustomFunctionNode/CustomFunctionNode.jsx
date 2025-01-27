@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 // eslint-disable-next-line react/prop-types
 const CustomFunctionNode = ({ data }) => {
   const dispatch = useDispatch();
-  const items = ["Server 1", "Server 2", "Server 3", "Server 4", "Server 5"];
+  const items = ["punesaphana14"];
   const [selectedItems, setSelectedItems] = useState([]);
   console.log("server selection data", data);
   useEffect(() => {
@@ -27,7 +27,7 @@ const CustomFunctionNode = ({ data }) => {
       newSelectedItems.splice(currentIndex, 1);
     }
 
-    setSelectedItems(newSelectedItems);
+    setSelectedItems(newSelectedItems.sort());
   };
 
   return (

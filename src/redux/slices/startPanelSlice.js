@@ -5,6 +5,7 @@ const startPanelSlice = createSlice({
   name: "startPanelSlice",
   initialState: {
     isOpen: false,
+    discard: 0,
     isExecuteOpen: false,
     componentType: "",
     nodes: [],
@@ -40,6 +41,10 @@ const startPanelSlice = createSlice({
       });
       state.nodes = result;
     },
+    discard: (state) => {
+      state.isExecuteOpen = false;
+      state.discard = state.discard + 1;
+    },
   },
 });
 
@@ -51,6 +56,7 @@ export const {
   updateNodes,
   updateEdges,
   updateNodeValue,
+  discard,
 } = startPanelSlice.actions;
 
 // Export the reducer
