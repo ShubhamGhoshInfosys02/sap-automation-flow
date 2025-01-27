@@ -35,9 +35,11 @@ const CustomFunctionNode = ({ data }) => {
       <Handle type="target" position={Position.Top} />
       <div
         style={{
-          backgroundColor: "#F5F5DC",
-          padding: "5px 10px",
-          borderRadius: "5px",
+          backgroundColor: "white",
+          padding: "15px 20px",
+          borderRadius: "10px",
+          boxShadow:"0px 0px 20px 1px rgb(187, 186, 186)"
+      
         }}
       >
         <div style={{ fontSize: "18px", fontWeight: "600" }}>
@@ -57,11 +59,10 @@ const CustomFunctionNode = ({ data }) => {
                       },
                     }}
                     size="small"
-                    color="success"
                     checked={selectedItems.indexOf(item) !== -1}
                     onChange={() => handleToggle(item)}
                     name={item}
-                    style={{ padding: "0 10px" }}
+                    style={{ padding: "0 10px" ,color:"rgb(30, 159, 233)"}}
                   />
                 }
                 label={item}
