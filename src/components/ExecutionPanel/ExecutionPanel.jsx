@@ -13,6 +13,8 @@ const ExecutionPanel = () => {
   const dispatch = useDispatch();
   const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
   const selectedServer=useSelector((state)=>state.startPanelSlice.selectedServer)
+  const discordButtonClicked=useSelector((state)=>state.startPanelSlice.discardButton)
+  console.log(discordButtonClicked,"agsfgfs")
   const [executionData, setexecutionData] = useState({
     dateTime: { date: "", time: "" },
     server: [],
@@ -135,7 +137,7 @@ const ExecutionPanel = () => {
             <div>
               {executionData.server.map((d,index) => (
                 <div key={d} style={{display:'flex',flexDirection:"row"}}>
-                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{selectedServer}</p></div>
+                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{discordButtonClicked===true?"No Server Selected":selectedServer}</p></div>
               ))}
             </div>
           ) : (

@@ -10,7 +10,8 @@ const startPanelSlice = createSlice({
     componentType: "",
     nodes: [],
     edges: [],
-    selectedServer:[]
+    selectedServer:[],
+    discardButton:false
   },
   reducers: {
     togglePanel: (state) => {
@@ -34,6 +35,9 @@ const startPanelSlice = createSlice({
       else{
         state.selectedServer=[...state.selectedServer,action.payload]
       }  
+    },
+    updateDiscard:(state,action)=>{
+        state.discardButton=action.payload
     },
     updateEdges: (state, action) => {
       state.edges = action.payload;
@@ -66,7 +70,8 @@ export const {
   updateEdges,
   updateNodeValue,
   discard,
-  updateSelectedServer
+  updateSelectedServer,
+  updateDiscard
 } = startPanelSlice.actions;
 
 // Export the reducer

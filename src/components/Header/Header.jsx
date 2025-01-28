@@ -3,6 +3,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
   toggleExecutePanel,
   discard,
+  updateDiscard,
 } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
 
@@ -24,13 +25,17 @@ const Header = () => {
         <div className="mainthree">
           <button
             className="mainthreebutton1"
-            onClick={() => dispatch(discard())}
+            onClick={() => {
+              dispatch(updateDiscard(true))
+              dispatch(discard())}}
           >
             Discard
           </button>
           <button
             className="mainthreebutton2"
-            onClick={() => dispatch(toggleExecutePanel())}
+            onClick={() => {
+              
+              dispatch(toggleExecutePanel())}}
           >
             Execute
           </button>
