@@ -12,10 +12,11 @@ const ExecutionPanel = () => {
   const isOpen = useSelector((state) => state.startPanelSlice.isExecuteOpen);
   const dispatch = useDispatch();
   const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
-  console.log(reduxNode,"....")
-  const selectedServer=useSelector((state)=>state.startPanelSlice.selectedServer)
-  console.log(selectedServer,"////")
-  const discordButtonClicked=useSelector((state)=>state.startPanelSlice.discardButton)
+  console.log(reduxNode, "....");
+  const selectedServer = useSelector(
+    (state) => state.startPanelSlice.selectedServer
+  );
+
   const [executionData, setexecutionData] = useState({
     dateTime: { date: "", time: "" },
     server: [],
@@ -24,15 +25,13 @@ const ExecutionPanel = () => {
   const executeCommands = useMemo(() => {
     if (executionData.server && executionData.action == "Start") {
       return executionData.server.map(
-        (d) => `ssh fsssadm@${d} sapcontrol -nr 00 -function GetProcessList`
+        (d) => `ssh fssadm@${d} sapcontrol -nr 00 -function GetProcessList`
       );
     } else if (executionData.server && executionData.action == "Stop") {
-      return executionData.server.map(
-        (d) => `sapcontrol -nr ${d} -function StartSystem`
-      );
+      return executionData.server.map((d) => `ssh fssadm@${d} R3trans -d`);
     }
     return [];
-  }, [executionData,isOpen,selectedServer]);
+  }, [executionData, isOpen, selectedServer]);
   const runPythonScript = async (scripts) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/run-scripts", {
@@ -58,9 +57,6 @@ const ExecutionPanel = () => {
   };
   useEffect(() => {
     const timeData = reduxNode.filter((d) => d.type == "customTimeUpdater");
-    const serverData = reduxNode.filter(
-      (d) => d.type == "customFunctionUpdater"
-    );
     const startaction = reduxNode.filter((d) => d.type == "customUpdater");
     const stopAction = reduxNode.filter((d) => d.type == "stopComponent");
     const result = {
@@ -70,15 +66,14 @@ const ExecutionPanel = () => {
         startaction.length > 0 ? "Start" : stopAction.length > 0 ? "Stop" : "",
     };
     setexecutionData(result);
-  }, [reduxNode,isOpen,selectedServer]);
+  }, [reduxNode, isOpen, selectedServer]);
 
   useEffect(() => {
     if (isOpen && executeCommands.length > 0) {
       runPythonScript(executeCommands);
     }
-  }, [executeCommands, isOpen,selectedServer]);
+  }, [executeCommands, isOpen, selectedServer]);
 
-  console.log("executeCommands", executeCommands);
   return (
     <div className="econtainer">
       <div className={`epanel ${isOpen ? "open" : ""}`}>
@@ -95,18 +90,30 @@ const ExecutionPanel = () => {
             <KeyboardDoubleArrowRightIcon fontSize="medium" />
           </IconButton>
         </div>
-        <Card className="ecardStyle" >
-          <div style={{display:"flex",justifyContent:"center"}}><p style={{fontSize:"20px",fontWeight:"bolder"}}>Time of Execution</p></div>
+        <Card className="ecardStyle">
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p style={{ fontSize: "20px", fontWeight: "bolder" }}>
+              Time of Execution
+            </p>
+          </div>
           <div
             style={{
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
-              marginLeft:"10px",
-              marginBottom:"10px"
+              marginLeft: "10px",
+              marginBottom: "10px",
             }}
           >
-            <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Date : </span>
+            <span
+              style={{
+                fontSize: "15px",
+                fontWeight: "bolder",
+                marginRight: "6px",
+              }}
+            >
+              Date :{" "}
+            </span>
             <span>
               {executionData?.dateTime?.date &&
               executionData?.dateTime?.date !== ""
@@ -119,11 +126,19 @@ const ExecutionPanel = () => {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
-               marginLeft:"10px",
-              marginBottom:"10px"
+              marginLeft: "10px",
+              marginBottom: "10px",
             }}
           >
-            <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Time :</span>
+            <span
+              style={{
+                fontSize: "15px",
+                fontWeight: "bolder",
+                marginRight: "6px",
+              }}
+            >
+              Time :
+            </span>
             <span>
               {executionData?.dateTime?.time &&
               executionData?.dateTime?.time !== ""
@@ -133,17 +148,41 @@ const ExecutionPanel = () => {
           </div>
         </Card>
         <Card className="ecardStyle">
-        <div style={{display:"flex",justifyContent:"center"}}><p style={{fontSize:"20px",fontWeight:"bolder"}}>Servers</p></div>
-        {executionData.server && executionData.server.length > 0 ? (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p style={{ fontSize: "20px", fontWeight: "bolder" }}>Servers</p>
+          </div>
+          {executionData.server && executionData.server.length > 0 ? (
             <div>
-              {executionData.server.map((d,index) => (
-                <div key={d} style={{display:'flex',flexDirection:"row"}}>
-                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{selectedServer}</p></div>
+              {executionData.server.map((d) => (
+                <div key={d} style={{ display: "flex", flexDirection: "row" }}>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "bolder",
+                      marginRight: "6px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    Servername :
+                  </p>
+                  <p>{selectedServer}</p>
+                </div>
               ))}
             </div>
           ) : (
-            <div  style={{display:'flex',flexDirection:"row"}}>
-                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>No Servers Selected</p></div>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <p
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "bolder",
+                  marginRight: "6px",
+                  marginLeft: "10px",
+                }}
+              >
+                Servername :
+              </p>
+              <p>No Servers Selected</p>
+            </div>
           )}
         </Card>
         <Card
@@ -152,12 +191,20 @@ const ExecutionPanel = () => {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            paddingLeft:"10px",
-            paddingTop:"10px",
-            paddingBottom:"10px"
+            paddingLeft: "10px",
+            paddingTop: "10px",
+            paddingBottom: "10px",
           }}
         >
-          <span style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px"}}>Action :</span>
+          <span
+            style={{
+              fontSize: "15px",
+              fontWeight: "bolder",
+              marginRight: "6px",
+            }}
+          >
+            Action :
+          </span>
           <span>
             {executionData.action !== ""
               ? executionData.action
