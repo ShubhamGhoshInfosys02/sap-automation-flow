@@ -10,6 +10,7 @@ const startPanelSlice = createSlice({
     componentType: "",
     nodes: [],
     edges: [],
+    selectedServer:[]
   },
   reducers: {
     togglePanel: (state) => {
@@ -25,6 +26,14 @@ const startPanelSlice = createSlice({
     },
     updateNodes: (state, action) => {
       state.nodes = action.payload;
+    },
+    updateSelectedServer:(state,action)=>{
+      if(state.selectedServer.includes(action.payload)){
+        state.selectedServer=state.selectedServer.filter((data)=>data!==action.payload);
+      }
+      else{
+        state.selectedServer=[...state.selectedServer,action.payload]
+      }  
     },
     updateEdges: (state, action) => {
       state.edges = action.payload;
@@ -57,6 +66,7 @@ export const {
   updateEdges,
   updateNodeValue,
   discard,
+  updateSelectedServer
 } = startPanelSlice.actions;
 
 // Export the reducer

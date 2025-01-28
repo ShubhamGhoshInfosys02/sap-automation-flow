@@ -3,7 +3,7 @@ import { Handle, Position } from "@xyflow/react";
 import "./CustomFunctionNode.css";
 import { useEffect, useState } from "react";
 import { FormControlLabel, Checkbox, FormGroup, Divider } from "@mui/material";
-import { updateNodeValue } from "../../redux/slices/startPanelSlice";
+import { updateNodeValue, updateSelectedServer } from "../../redux/slices/startPanelSlice";
 import { useDispatch } from "react-redux";
 
 // eslint-disable-next-line react/prop-types
@@ -20,7 +20,7 @@ const CustomFunctionNode = ({ data }) => {
   const handleToggle = (item) => {
     const currentIndex = selectedItems.indexOf(item);
     const newSelectedItems = [...selectedItems];
-
+    dispatch(updateSelectedServer(item));
     if (currentIndex === -1) {
       newSelectedItems.push(item);
     } else {

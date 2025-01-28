@@ -12,7 +12,7 @@ const ExecutionPanel = () => {
   const isOpen = useSelector((state) => state.startPanelSlice.isExecuteOpen);
   const dispatch = useDispatch();
   const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
-
+  const selectedServer=useSelector((state)=>state.startPanelSlice.selectedServer)
   const [executionData, setexecutionData] = useState({
     dateTime: { date: "", time: "" },
     server: [],
@@ -29,7 +29,7 @@ const ExecutionPanel = () => {
       );
     }
     return [];
-  }, [executionData]);
+  }, [executionData,isOpen,selectedServer]);
   const runPythonScript = async (scripts) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/run-scripts", {
@@ -62,18 +62,18 @@ const ExecutionPanel = () => {
     const stopAction = reduxNode.filter((d) => d.type == "stopComponent");
     const result = {
       dateTime: timeData[0]?.data?.value,
-      server: serverData[0]?.data?.value,
+      server: selectedServer,
       action:
         startaction.length > 0 ? "Start" : stopAction.length > 0 ? "Stop" : "",
     };
     setexecutionData(result);
-  }, [reduxNode]);
+  }, [reduxNode,isOpen,selectedServer]);
 
   useEffect(() => {
     if (isOpen && executeCommands.length > 0) {
       runPythonScript(executeCommands);
     }
-  }, [executeCommands, isOpen]);
+  }, [executeCommands, isOpen,selectedServer]);
 
   console.log("executeCommands", executeCommands);
   return (
@@ -135,7 +135,7 @@ const ExecutionPanel = () => {
             <div>
               {executionData.server.map((d,index) => (
                 <div key={d} style={{display:'flex',flexDirection:"row"}}>
-                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{d}</p></div>
+                  <p style={{fontSize:"15px",fontWeight:"bolder",marginRight:"6px",marginLeft:"10px"}}>Servername :</p><p>{selectedServer}</p></div>
               ))}
             </div>
           ) : (
