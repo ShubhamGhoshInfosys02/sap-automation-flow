@@ -114,7 +114,7 @@ export default function App() {
         onConnect={onConnect}
         nodeTypes={nodeTypes}
         proOptions={proOptions}
-        fitView
+        zoom={0.5}
       >
         <Controls />
         <Background variant="dots" />

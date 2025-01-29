@@ -7,11 +7,13 @@ import Card from "@mui/material/Card";
 import { useDispatch, useSelector } from "react-redux";
 import "./ExecutionPanel.css";
 import { useEffect, useMemo, useState } from "react";
+import { Button } from "@mui/material";
 
 const ExecutionPanel = () => {
   const isOpen = useSelector((state) => state.startPanelSlice.isExecuteOpen);
   const dispatch = useDispatch();
   const reduxNode = useSelector((state) => state.startPanelSlice.nodes);
+  const reduxEdges = useSelector((state) => state.startPanelSlice.edges);
   console.log(reduxNode, "....");
   const selectedServer = useSelector(
     (state) => state.startPanelSlice.selectedServer
@@ -67,12 +69,11 @@ const ExecutionPanel = () => {
     };
     setexecutionData(result);
   }, [reduxNode, isOpen, selectedServer]);
+  console.log("reduxEdges", reduxEdges);
+  console.log("reduxNode", reduxNode);
 
-  useEffect(() => {
-    if (isOpen && executeCommands.length > 0) {
-      runPythonScript(executeCommands);
-    }
-  }, [executeCommands, isOpen, selectedServer]);
+  console.log("disabled", reduxEdges.length == reduxNode.length - 1);
+  console.log("disabled", executeCommands.length <= 0);
 
   return (
     <div className="econtainer">
@@ -211,21 +212,29 @@ const ExecutionPanel = () => {
               : "No actions found"}
           </span>
         </Card>
+
         {executeCommands.length > 0 ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              flexDirection: "column",
-            }}
-          >
-            {executeCommands.map((d) => (
-              <div key={d}>{d}</div>
-            ))}
-          </div>
+          <Card className="ecardStyle columnStyle">
+            <div>
+              {executeCommands.map((d) => (
+                <div key={d}>{d}</div>
+              ))}
+            </div>
+          </Card>
         ) : (
           <></>
         )}
+        <Button
+          variant="outlined"
+          disabled={
+            executeCommands.length <= 0 ||
+            reduxEdges.length < reduxNode.length - 1
+          }
+          onClick={() => runPythonScript(executeCommands)}
+          sx={{ width: "100%" }}
+        >
+          Run Command
+        </Button>
       </div>
     </div>
   );
